@@ -1,5 +1,5 @@
 from datetime import datetime
-import authentication
+import main
 
 
 def validate_info(project_info):
@@ -43,6 +43,6 @@ def check_project_exists(title):
         project_info = project.split(', ')
         project_title = project_info[1]
         project_owner = project_info[0]
-        if(authentication.current_user_email.lower() == project_owner.lower() and project_title.lower() == title.lower()):
+        if(main.current_user_email.lower() == project_owner.lower() and project_title.lower() == title.lower()):
             return False
     return True

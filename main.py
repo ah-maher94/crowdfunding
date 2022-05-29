@@ -71,7 +71,4 @@ def display_menu():
         display_menu()
 
 
-
-
-
 display_menu()

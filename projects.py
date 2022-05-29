@@ -1,6 +1,6 @@
 import sys
 import project_validation
-import authentication
+import main
 from datetime import datetime
 
 def display_projects_menu():
@@ -54,7 +54,7 @@ def add_project(project_info = {}):
 
     if(project_validation.validate_info(project_info)):
         db = open('projects.txt', 'a')
-        db.write(f"{authentication.current_user_email}, {project_info['title']}, {project_info['details']}, {250000}, {project_info['start_time']}, {project_info['end_time']}\n")
+        db.write(f"{main.current_user_email}, {project_info['title']}, {project_info['details']}, {250000}, {project_info['start_time']}, {project_info['end_time']}\n")
         db.close()
         print(action)
 
@@ -71,7 +71,7 @@ def edit_project():
         project_info = project.split(', ')
         project_title = project_info[1]
         project_owner = project_info[0]
-        if(authentication.current_user_email.lower() == project_owner.lower() and project_title.lower() == project_name.lower()):
+        if(main.current_user_email.lower() == project_owner.lower() and project_title.lower() == project_name.lower()):
             updated = True
             update_project(project_info)
     if not updated:
@@ -133,9 +133,9 @@ def rewrite_data(target_project):
             project_info = project.split(', ')
             project_title = project_info[1]
             project_owner = project_info[0]
-            if not (project_owner.lower() == authentication.current_user_email.lower() and project_title.lower() == target_project.lower()):
+            if not (project_owner.lower() == main.current_user_email.lower() and project_title.lower() == target_project.lower()):
                 db.write(project)
-            elif(project_owner.lower() == authentication.current_user_email.lower() and project_title.lower() == target_project.lower()):
+            elif(project_owner.lower() == main.current_user_email.lower() and project_title.lower() == target_project.lower()):
                 deleted = True
 
     db.close()
